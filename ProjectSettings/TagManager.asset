@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Fountain
+  - Collision Wall
   - 
   - 
   - 
@@ -40,4 +40,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 482299625
+    locked: 0
+  - name: Decorations
+    uniqueID: 1369277409
+    locked: 0
+  - name: Collidables
+    uniqueID: 1743454955
+    locked: 0
+  - name: Actors
+    uniqueID: 3624189521
+    locked: 0
+  - name: Lower Wall
+    uniqueID: 3800753543
     locked: 0
