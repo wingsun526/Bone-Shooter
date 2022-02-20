@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVelocity = new Vector2(moveInput.x * speed, moveInput.y * speed);
         myRigidbody.velocity = playerVelocity;
         
+        
         // For starting up the move animation
         bool playerIsMoving = Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y) > Mathf.Epsilon;
         myAnimator.SetBool("isMoving", playerIsMoving);
