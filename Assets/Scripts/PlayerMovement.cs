@@ -11,9 +11,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 1.0f;
     //[SerializeField] private float pushRecoveryTime = 0.3f;
     [SerializeField] private float pushRecoveryAmount = 0.2f;
-    
-    
-    [Header("Weapon")]
+
+
+    [Header("Weapon")] 
+    [SerializeField] private float weaponDamage = 1.0f;
     [SerializeField] private float weaponPushForce = 5.0f;
     [SerializeField] private float weaponReloadTime = 1.0f;
     
@@ -71,6 +72,16 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.AddForce(-(mouseWorldPosition - (Vector2)myRigidbody.transform.position).normalized * weaponPushForce, ForceMode2D.Impulse);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Enemy") )
+        {
+            other.gameObject.SendMessage("ReceiveDamage", weaponDamage);
+
+        }
+    }
+
     private void Run()
     {
         // player lose control when being pushed by force, gains back control when velocity smaller than a certain amount

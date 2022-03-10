@@ -11,12 +11,12 @@ public class Enemy : LivingThings
     [SerializeField] private float chaseLength = 0.5f;
     [SerializeField] private Transform playerTransform;
    
-    private Rigidbody2D myRigidbody2D;
+    //private Rigidbody2D myRigidbody2D;
 
-    void Start()
+    protected override void Start()
     {
-        myRigidbody2D = GetComponent<Rigidbody2D>();
-        
+        base.Start();
+
     }
 
     

@@ -308,7 +308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704891243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.159, y: -0.027, z: 0}
+  m_LocalPosition: {x: -0.103, y: -0.016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -328,6 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   pushRecoveryAmount: 0.2
+  weaponDamage: 1
   weaponPushForce: 3
   weaponReloadTime: 1
 --- !u!114 &704891248
@@ -404,7 +405,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704891243}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -536,6 +537,10 @@ PrefabInstance:
     - target: {fileID: 7910998404176212065, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910998404176212065, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7910998404176212068, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
       propertyPath: m_RootOrder
@@ -1417,6 +1422,10 @@ PrefabInstance:
     - target: {fileID: 7910998404176212065, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910998404176212065, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7910998404176212068, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
       propertyPath: m_RootOrder
@@ -4325,6 +4334,10 @@ PrefabInstance:
     - target: {fileID: 7910998404176212065, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910998404176212066, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7910998404176212068, guid: 6377b7a2530c8dd4fb90d50856ed89a4, type: 3}
       propertyPath: m_RootOrder

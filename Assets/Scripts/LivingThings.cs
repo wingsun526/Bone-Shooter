@@ -7,10 +7,11 @@ using UnityEngine;
 public class LivingThings : MonoBehaviour
 {
     [SerializeField] private float health;
-    // Start is called before the first frame update
-    void Start()
+
+    protected Rigidbody2D myRigidbody2D;
+    protected virtual void Start()
     {
-        
+        myRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -19,17 +20,11 @@ public class LivingThings : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.gameObject.CompareTag("Player") )
-        {
-            Debug.Log("I got hit by the hero");
-            ReceiveDamage(1);
-        }
-    }
+    
 
     void ReceiveDamage(int damage)
     {
+        Debug.Log("I got hit by the player");
         health -= damage;
         if (health <= 0)
         {
