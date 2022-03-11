@@ -24,7 +24,8 @@ public class LivingThings : MonoBehaviour
 
     void ReceiveDamage(int damage)
     {
-        Debug.Log("I got hit by the player");
+        //string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration
+        FloatingDamageTextManager.instance.Show(damage.ToString(), 20, new Color(1f, 0.8f, 0.17f), myRigidbody2D.transform.position, Vector3.up * 40, 1f);
         health -= damage;
         if (health <= 0)
         {
