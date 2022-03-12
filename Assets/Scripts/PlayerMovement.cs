@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Weapon")] 
-    [SerializeField] private float weaponDamage = 1.0f;
+    //[SerializeField] private float weaponDamage = 1.0f;
     [SerializeField] private float weaponPushForce = 5.0f;
     [SerializeField] private float weaponReloadTime = 1.0f;
     
@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private bool beingPush = false;
     private Vector2 mouseWorldPosition;
     private float lastPush;
+
+    private Vector3 playerCurrentVelocity;
     void Start()
     {
         myAnimator = GetComponent<Animator>();
@@ -34,9 +36,14 @@ public class PlayerMovement : MonoBehaviour
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    
+    private void FixedUpdate()
+    {
+        playerCurrentVelocity = myRigidbody.velocity;
+    }
+
     void Update()
     {
+        //Debug.Log(myRigidbody.velocity);
         mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Run();
         FlipSprite();
@@ -70,14 +77,21 @@ public class PlayerMovement : MonoBehaviour
                     It will literally add the force to the Object's velocity in a single frame.*/
             // rigidbody drag will act on this force over time.
             myRigidbody.AddForce(-(mouseWorldPosition - (Vector2)myRigidbody.transform.position).normalized * weaponPushForce, ForceMode2D.Impulse);
+            myAnimator.SetBool("isPushing", true);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (!beingPush) return;
         if(other.gameObject.CompareTag("Enemy") )
         {
-            other.gameObject.SendMessage("ReceiveDamage", weaponDamage);
+            // Damage based on the velocity
+            int momentumDamage = (int)Math.Floor(Math.Abs(playerCurrentVelocity.x) + Math.Abs(playerCurrentVelocity.y));
+            DamageData dmgData = new DamageData();
+            dmgData.damage = momentumDamage;
+            dmgData.playerVelocity = playerCurrentVelocity;
+            other.gameObject.SendMessage("ReceiveDamage", dmgData);
 
         }
     }
@@ -88,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
         if (Math.Abs(myRigidbody.velocity.x) + Math.Abs(myRigidbody.velocity.y)  < pushRecoveryAmount)//(Time.time - lastPush > pushRecoveryTime)
         {
             beingPush = false;
+            myAnimator.SetBool("isPushing", false);
         }
 
         if (!beingPush)
