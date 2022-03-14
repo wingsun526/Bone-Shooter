@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator myAnimator;
     private Rigidbody2D myRigidbody;
     private SpriteRenderer mySpriteRenderer;
+    private Transform myTransform;
+    private Transform myWeapon;
 
     private bool beingPush = false;
     private Vector2 mouseWorldPosition;
@@ -34,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        myTransform = GetComponent<Transform>();
+        myWeapon = myTransform.Find("Weapon");
     }
 
     private void FixedUpdate()
@@ -47,6 +51,16 @@ public class PlayerMovement : MonoBehaviour
         mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Run();
         FlipSprite();
+        RotateWeapon();
+    }
+
+    private void RotateWeapon()
+    {
+        //myWeapon.Rotate(0, 0, Vector2.Angle(mouseWorldPosition, myWeapon.position)); //Vector2.Angle(mouseWorldPosition, myWeapon.transform.position); 
+        //myWeapon.rotation = Quaternion.Euler(0, 0, Vector2.Angle(mouseWorldPosition, myWeapon.transform.position) + 90);
+        //myWeapon.LookAt(mouseWorldPosition);
+        Vector2 direction = (mouseWorldPosition - (Vector2) myWeapon.position).normalized;
+        myWeapon.up = direction;
     }
 
 
@@ -126,11 +140,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (mouseWorldPosition.x > myRigidbody.position.x)
         {
-            mySpriteRenderer.flipX = false;
+            myTransform.localScale = new Vector3(1, 1, 1);
         }
         else if (mouseWorldPosition.x < myRigidbody.position.x)
         {
-            mySpriteRenderer.flipX = true;
+            myTransform.localScale = new Vector3(-1, 1, 1);
         }
     }
 

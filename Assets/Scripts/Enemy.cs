@@ -28,7 +28,7 @@ public class Enemy : LivingThings
     void Update()
     {
         FreeToMove();
-        chase();
+        Chase();
     }
 
     private void FreeToMove()
@@ -39,11 +39,10 @@ public class Enemy : LivingThings
         }
     }
 
-    void chase()
+    void Chase()
     {
         if (beingPush)
         {
-            myRigidbody2D.velocity = Vector2.zero;
             return;
         }
 
@@ -54,10 +53,7 @@ public class Enemy : LivingThings
             Vector3 delta = playerTransform.position - myRigidbody2D.transform.position;
             myRigidbody2D.velocity = new Vector2(delta.x, delta.y).normalized * speed;
         }
-        else
-        {
-            myRigidbody2D.velocity = Vector2.zero;
-        }
+        
 
     }
     void ReceiveDamage(DamageData dmgData)
