@@ -17,10 +17,12 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] private float weaponDamage = 1.0f;
     [SerializeField] private float weaponPushForce = 5.0f;
     [SerializeField] private float weaponReloadTime = 1.0f;
+    //[SerializeField] private ParticleSystem weaponFiring;
     
     
     private Vector2 moveInput;
     private Animator myAnimator;
+    private Animator myWeaponAnimator;
     private Rigidbody2D myRigidbody;
     private SpriteRenderer mySpriteRenderer;
     private Transform myTransform;
@@ -34,10 +36,12 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         myAnimator = GetComponent<Animator>();
+        
         myRigidbody = GetComponent<Rigidbody2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         myTransform = GetComponent<Transform>();
         myWeapon = myTransform.Find("Weapon");
+        myWeaponAnimator = myWeapon.GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -71,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     void OnFire(InputValue value)
     {
         PushPlayer();
-        
+        myWeaponAnimator.SetTrigger("fireNow");
     }
     void PushPlayer()
     {
@@ -79,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         {
             beingPush = true;
             lastPush = Time.time;
+            //weaponFiring.Play();
             // shoot the player to the direction with a force
             // difference Forcemode are available
             /*  ForceMode.Force - Applies a gradual force on the Object, taking mass into account.
