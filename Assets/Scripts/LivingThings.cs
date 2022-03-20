@@ -8,12 +8,12 @@ public class LivingThings : MonoBehaviour
 {
     [SerializeField] protected float health;
 
-    protected Rigidbody2D myRigidbody2D;
+    
 
     //protected bool beingPush = false;
-    protected virtual void Start()
+    void Start()
     {
-        myRigidbody2D = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class LivingThings : MonoBehaviour
     }
 
     
-
+    
     
 
     protected virtual void Die()

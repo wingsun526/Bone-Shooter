@@ -6,33 +6,44 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private int damage;
     
     private Rigidbody2D myRigidbody;
+    private Transform myTransform;
     private Transform playerTransform;
+    private Vector2 directionToGo;
 
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myTransform = GetComponent<Transform>();
     }
 
     void Start()
     {
         playerTransform = FindObjectOfType<PlayerMovement>().transform;
-        myRigidbody.transform.Rotate(new Vector3(0, 0, 90));
+        SetUpArrow();
     }
     
     void Update()
     {
-        myRigidbody.velocity = new Vector2(1, 1) * speed;
+        myRigidbody.velocity = directionToGo * speed;
     }
     
+    private void SetUpArrow()
+    {
+        directionToGo = (playerTransform.position - myRigidbody.transform.position).normalized;
+        var arrowRotateAngle = Vector2.Angle(myRigidbody.position, playerTransform.position);
+        myTransform.up = directionToGo;
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Hit");
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
+            var dmgData = new DamageData();
+            dmgData.damage = damage;
+            other.gameObject.SendMessage("ReceiveDamage", dmgData);
         }
         Destroy(gameObject);
     }

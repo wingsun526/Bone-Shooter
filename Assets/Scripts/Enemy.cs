@@ -13,15 +13,16 @@ public class Enemy : LivingThings
     [SerializeField] private float pushRecoveryTime = 0.8f;
     [SerializeField] private Transform playerTransform;
    
-    //private Rigidbody2D myRigidbody2D;
+    private Rigidbody2D myRigidbody2D;
     private bool beingPush = false;
     private float lastPush;
     
+     
+    
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-
+        myRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     
@@ -56,6 +57,7 @@ public class Enemy : LivingThings
         
 
     }
+
     void ReceiveDamage(DamageData dmgData)
     {
         beingPush = true;

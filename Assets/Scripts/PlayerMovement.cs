@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Animator myAnimator;
     private Animator myWeaponAnimator;
-    private Rigidbody2D myRigidbody;
+    private Rigidbody2D myRigidbody2D;
     private SpriteRenderer mySpriteRenderer;
     private Transform myTransform;
     private Transform myWeapon;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     {
         myAnimator = GetComponent<Animator>();
         
-        myRigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody2D = GetComponent<Rigidbody2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         myTransform = GetComponent<Transform>();
         myWeapon = myTransform.Find("Weapon");
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerCurrentVelocity = myRigidbody.velocity;
+        playerCurrentVelocity = myRigidbody2D.velocity;
     }
 
     void Update()
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     void OnFire(InputValue value)
     {
         PushPlayer();
-        myWeaponAnimator.SetTrigger("fireNow");
+        
     }
     void PushPlayer()
     {
@@ -83,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         {
             beingPush = true;
             lastPush = Time.time;
+            myWeaponAnimator.SetTrigger("fireNow");
             //weaponFiring.Play();
             // shoot the player to the direction with a force
             // difference Forcemode are available
@@ -95,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
                 ForceMode.VelocityChange - Same as ForceMode.Impulse and again, doesn't take mass into account. 
                     It will literally add the force to the Object's velocity in a single frame.*/
             // rigidbody drag will act on this force over time.
-            myRigidbody.AddForce(-(mouseWorldPosition - (Vector2)myRigidbody.transform.position).normalized * weaponPushForce, ForceMode2D.Impulse);
+            myRigidbody2D.AddForce(-(mouseWorldPosition - (Vector2)myRigidbody2D.transform.position).normalized * weaponPushForce, ForceMode2D.Impulse);
             myAnimator.SetBool("isPushing", true);
         }
     }
@@ -109,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
             int momentumDamage = (int)Math.Floor(Math.Abs(playerCurrentVelocity.x) + Math.Abs(playerCurrentVelocity.y));
             DamageData dmgData = new DamageData();
             dmgData.damage = momentumDamage;
-            dmgData.playerVelocity = playerCurrentVelocity;
             other.gameObject.SendMessage("ReceiveDamage", dmgData);
 
         }
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     private void Run()
     {
         // player lose control when being pushed by force, gains back control when velocity smaller than a certain amount
-        if (Math.Abs(myRigidbody.velocity.x) + Math.Abs(myRigidbody.velocity.y)  < pushRecoveryAmount)//(Time.time - lastPush > pushRecoveryTime)
+        if (Math.Abs(myRigidbody2D.velocity.x) + Math.Abs(myRigidbody2D.velocity.y)  < pushRecoveryAmount)//(Time.time - lastPush > pushRecoveryTime)
         {
             beingPush = false;
             myAnimator.SetBool("isPushing", false);
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         {
             
             Vector2 playerVelocity = new Vector2(moveInput.x, moveInput.y) * speed;
-            myRigidbody.velocity = playerVelocity;
+            myRigidbody2D.velocity = playerVelocity;
         
     
     
@@ -143,11 +143,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FlipSprite()
     {
-        if (mouseWorldPosition.x > myRigidbody.position.x)
+        if (mouseWorldPosition.x > myRigidbody2D.position.x)
         {
             myTransform.localScale = new Vector3(1, 1, 1);
         }
-        else if (mouseWorldPosition.x < myRigidbody.position.x)
+        else if (mouseWorldPosition.x < myRigidbody2D.position.x)
         {
             myTransform.localScale = new Vector3(-1, 1, 1);
         }
