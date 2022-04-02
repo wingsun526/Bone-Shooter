@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -27,9 +28,16 @@ public class Arrow : MonoBehaviour
     
     void Update()
     {
+        StartCoroutine(FireArrow());
+        
+    }
+
+    private IEnumerator FireArrow()
+    {
+        yield return new WaitForSeconds(1);
         myRigidbody.velocity = directionToGo * speed;
     }
-    
+
     private void SetUpArrow()
     {
         directionToGo = (playerTransform.position - myRigidbody.transform.position).normalized;

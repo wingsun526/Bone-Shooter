@@ -8,28 +8,34 @@ using Debug = UnityEngine.Debug;
 
 public class Enemy : LivingThings
 {
-    [SerializeField] float speed = 1.0f;
-    [SerializeField] private float chaseLength = 0.5f;
+    [SerializeField] protected float speed = 1.0f;
+    [SerializeField] protected float chaseLength = 0.5f;
     [SerializeField] private float pushRecoveryTime = 0.8f;
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] protected Transform playerTransform;
    
-    private Rigidbody2D myRigidbody2D;
-    private bool beingPush = false;
+    protected Rigidbody2D myRigidbody2D;
+    protected Animator myAnimator;
+    protected Transform myTransform;
+    protected bool beingPush = false;
     private float lastPush;
+    protected bool lockSpriteFlip = false;
     
      
     
 
-    protected void Start()
+    protected virtual void Start()
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
+        myTransform = GetComponent<Transform>();
     }
 
     
-    void Update()
+    protected virtual void Update()
     {
+        FlipSprite();
         FreeToMove();
-        Chase();
+        IndividualAction();
     }
 
     private void FreeToMove()
@@ -40,8 +46,12 @@ public class Enemy : LivingThings
         }
     }
 
-    void Chase()
+    protected virtual void IndividualAction()
     {
+        
+        bool enemyIsMoving = Mathf.Abs(myRigidbody2D.velocity.x) + Mathf.Abs(myRigidbody2D.velocity.y) > Mathf.Epsilon;
+        myAnimator.SetBool("isMoving", enemyIsMoving);
+        
         if (beingPush)
         {
             return;
@@ -51,11 +61,29 @@ public class Enemy : LivingThings
         // start chasing player when player is in range(chaseLength)
         if (Vector2.Distance(playerTransform.position, myRigidbody2D.transform.position) < chaseLength)
         {
+            
             Vector3 delta = playerTransform.position - myRigidbody2D.transform.position;
             myRigidbody2D.velocity = new Vector2(delta.x, delta.y).normalized * speed;
+            
+            
+            
         }
         
 
+    }
+    
+    private void FlipSprite()
+    {
+        if (lockSpriteFlip) return;
+        
+        if (myRigidbody2D.position.x > playerTransform.position.x)
+        {
+            myTransform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (myRigidbody2D.position.x < playerTransform.position.x)
+        {
+            myTransform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     void ReceiveDamage(DamageData dmgData)

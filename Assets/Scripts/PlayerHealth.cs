@@ -1,28 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private float health = 10f;
+    [SerializeField] private List<Sprite> healthSprite;
+    [SerializeField] private GameObject healthBar;
+    [SerializeField] private float invincibleTimeAfterDamage;
+    
+    [SerializeField] private int health = 6;
     private Rigidbody2D myRigidbody2D;
+    private PlayerMovement playerMovement;
+
+    private float lastTimeBeingDamage;
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateHealthBar();
     }
+
+    private void UpdateHealthBar()
+    {
+        var listOfHearts = healthBar.GetComponentsInChildren<Image>();
+        int quotient = health / 2;
+        int remainder = health % 2;
+        for (int i = 0; i < 3; i++)
+        {
+            if (quotient > i)
+            {
+                listOfHearts[i].sprite = healthSprite[2];
+            }
+            else if(quotient == i)
+            {
+                listOfHearts[i].sprite = healthSprite[remainder];
+            }
+            else
+            {
+                listOfHearts[i].sprite = healthSprite[0];
+            }
+
+            
+        }
+    }
+
     
     void ReceiveDamage(DamageData dmgData)
     {
-        //string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration
-        FloatingDamageTextManager.instance.Show(dmgData.damage.ToString(), 20, new Color(1f, 0.8f, 0.17f), myRigidbody2D.transform.position, Vector3.up * 40, 1f);
+        if (Time.time - lastTimeBeingDamage < invincibleTimeAfterDamage) return;
         health -= dmgData.damage;
+        playerMovement.DamagePush(dmgData.damageDirection * (float) 1.1);
+        
+        GameManager.instance.ScreenShake();
+        lastTimeBeingDamage = Time.time;
         if (health <= 0) 
         {
             Die();
@@ -31,6 +69,6 @@ public class PlayerHealth : MonoBehaviour
     
     void Die()
     {
-        Destroy(gameObject);
+        Debug.Log("You are Dead!!");
     }
 }

@@ -457,7 +457,7 @@ TextureImporter:
     second: 0x72_DungeonTilesetII_v1.4_150
   - first:
       213: 6064345131554341740
-    second: 0x72_DungeonTilesetII_v1.4_151
+    second: knight_sword
   - first:
       213: 7471726834140462288
     second: 0x72_DungeonTilesetII_v1.4_152
@@ -1090,13 +1090,13 @@ TextureImporter:
     second: 0x72_DungeonTilesetII_v1.4_361
   - first:
       213: -8066109314204623117
-    second: 0x72_DungeonTilesetII_v1.4_362
+    second: Heart_Full
   - first:
       213: -3116607659705801954
-    second: 0x72_DungeonTilesetII_v1.4_363
+    second: Heart_Half
   - first:
       213: -7963549056090711241
-    second: 0x72_DungeonTilesetII_v1.4_364
+    second: Heart_Empty
   - first:
       213: -6094828100330751448
     second: 0x72_DungeonTilesetII_v1.4_365
@@ -3535,195 +3535,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_95
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 823cfb101811afad0800000000000000
-      internalID: -2667800583485799640
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_96
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d91086be0cbcb3750800000000000000
-      internalID: 6285841734369280413
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_97
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8301ab638905b2df0800000000000000
-      internalID: -203980743431811016
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_98
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 02670c33e9fedceb0800000000000000
-      internalID: -4697835373525436896
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_99
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bce479fbd5ec1c010800000000000000
-      internalID: 1207473077153648331
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_100
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e9527ca09de9ac6e0800000000000000
-      internalID: -1816464844664658530
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_101
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c9e1ceafff04bdb70800000000000000
-      internalID: 8924798554735386268
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_102
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 67d34b84e9c01b840800000000000000
-      internalID: 5237981715572735350
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_103
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ca7755f2b018eec0800000000000000
-      internalID: -3537559146493150525
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: 0x72_DungeonTilesetII_v1.4_104
       rect:
         serializedVersion: 2
@@ -3940,7 +3751,7 @@ TextureImporter:
         x: 128
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3961,7 +3772,7 @@ TextureImporter:
         x: 144
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3982,7 +3793,7 @@ TextureImporter:
         x: 160
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4003,7 +3814,7 @@ TextureImporter:
         x: 176
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4024,7 +3835,7 @@ TextureImporter:
         x: 192
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4045,7 +3856,7 @@ TextureImporter:
         x: 208
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4066,7 +3877,7 @@ TextureImporter:
         x: 224
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4087,7 +3898,7 @@ TextureImporter:
         x: 240
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4108,7 +3919,7 @@ TextureImporter:
         x: 256
         y: 416
         width: 16
-        height: 16
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4139,27 +3950,6 @@ TextureImporter:
       bones: []
       spriteID: d8f26923c79f6e710800000000000000
       internalID: 1722338219335757709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_124
-      rect:
-        serializedVersion: 2
-        x: 304
-        y: 416
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 372270f2d11017360800000000000000
-      internalID: 7165509706977845875
       vertices: []
       indices: 
       edges: []
@@ -4711,13 +4501,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_151
+      name: knight_sword
       rect:
         serializedVersion: 2
-        x: 304
-        y: 400
-        width: 16
-        height: 16
+        x: 307
+        y: 401
+        width: 10
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -9100,13 +8890,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_362
+      name: Heart_Full
       rect:
         serializedVersion: 2
-        x: 288
-        y: 240
-        width: 16
-        height: 16
+        x: 289
+        y: 242
+        width: 13
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -9121,13 +8911,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_363
+      name: Heart_Half
       rect:
         serializedVersion: 2
-        x: 304
-        y: 240
-        width: 16
-        height: 16
+        x: 305
+        y: 242
+        width: 13
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -9142,13 +8932,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.4_364
+      name: Heart_Empty
       rect:
         serializedVersion: 2
-        x: 320
-        y: 240
-        width: 16
-        height: 16
+        x: 321
+        y: 242
+        width: 13
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -28,9 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private Transform myTransform;
     private Transform myWeapon;
 
-    private bool beingPush = false;
+    internal bool beingPush = false;
     private Vector2 mouseWorldPosition;
     private float lastPush;
+    private bool Attacking = false;
 
     private Vector3 playerCurrentVelocity;
     void Start()
@@ -51,11 +52,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(myRigidbody.velocity);
         mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        FreeToMove();
         Run();
         FlipSprite();
         RotateWeapon();
+    }
+
+    private void FreeToMove()
+    {
+        // player lose control when being pushed by force, gains back control when velocity smaller than a certain amount
+        if (Math.Abs(myRigidbody2D.velocity.x) + Math.Abs(myRigidbody2D.velocity.y)  < pushRecoveryAmount)//(Time.time - lastPush > pushRecoveryTime)
+        {
+            beingPush = false;
+            Attacking = false;
+            myAnimator.SetBool("isPushing", false);
+        }
     }
 
     private void RotateWeapon()
@@ -74,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnFire(InputValue value)
     {
+        Attacking = true;
         PushPlayer();
         
     }
@@ -101,9 +114,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // push when being damaged
+    internal void DamagePush(Vector2 pushDirection)
+    {
+        beingPush = true;
+        myRigidbody2D.AddForce(pushDirection, ForceMode2D.Impulse);
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!beingPush) return;
+        if (!Attacking) return;
         if(other.gameObject.CompareTag("Enemy") )
         {
             // Damage based on the velocity
@@ -117,12 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        // player lose control when being pushed by force, gains back control when velocity smaller than a certain amount
-        if (Math.Abs(myRigidbody2D.velocity.x) + Math.Abs(myRigidbody2D.velocity.y)  < pushRecoveryAmount)//(Time.time - lastPush > pushRecoveryTime)
-        {
-            beingPush = false;
-            myAnimator.SetBool("isPushing", false);
-        }
+        
 
         if (!beingPush)
         {

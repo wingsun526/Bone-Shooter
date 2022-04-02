@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct DamageData
 {
-    //public Vector2 playerVelocity;
+    public Vector2 damageDirection;
     public int damage;
 
 }

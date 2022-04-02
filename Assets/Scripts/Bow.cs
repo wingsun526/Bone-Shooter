@@ -28,8 +28,5 @@ public class Bow : MonoBehaviour
         }
 
     }
-    /*void SpawnArrow()
-    {
-        Instantiate(arrow, myTransform);
-    }*/
+    
 }
