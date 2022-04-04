@@ -72,9 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotateWeapon()
     {
-        //myWeapon.Rotate(0, 0, Vector2.Angle(mouseWorldPosition, myWeapon.position)); //Vector2.Angle(mouseWorldPosition, myWeapon.transform.position); 
-        //myWeapon.rotation = Quaternion.Euler(0, 0, Vector2.Angle(mouseWorldPosition, myWeapon.transform.position) + 90);
-        //myWeapon.LookAt(mouseWorldPosition);
+        
         Vector2 direction = (mouseWorldPosition - (Vector2) myWeapon.position).normalized;
         myWeapon.up = direction;
     }

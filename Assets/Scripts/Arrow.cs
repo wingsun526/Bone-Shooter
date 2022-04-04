@@ -28,13 +28,12 @@ public class Arrow : MonoBehaviour
     
     void Update()
     {
-        StartCoroutine(FireArrow());
+        FireArrow();
         
-    }
+    } 
 
-    private IEnumerator FireArrow()
+    private void FireArrow()
     {
-        yield return new WaitForSeconds(1);
         myRigidbody.velocity = directionToGo * speed;
     }
 

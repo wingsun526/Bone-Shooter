@@ -32,14 +32,8 @@ public class Knight : Enemy
 
     protected override void IndividualAction()
     {
-        if (beingPush)
-        {
-            return;
-        }
-        
-        //bool enemyIsMoving = Mathf.Abs(myRigidbody2D.velocity.x) + Mathf.Abs(myRigidbody2D.velocity.y) > Mathf.Epsilon;
-        
-        
+        if (beingPush) return;
+    
         if (actionInProgress) return;
         
         myAnimator.SetBool("isMoving", true);

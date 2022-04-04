@@ -5,11 +5,12 @@ using UnityEngine;
 public class Bow : MonoBehaviour
 {
     private Transform myTransform;
-    [SerializeField] GameObject arrow;
+    [SerializeField] Arrow arrow;
+    [SerializeField] private SpriteRenderer arrowSprite;
     void Start()
     {
         myTransform = GetComponent<Transform>();
-        StartCoroutine(SpawnArrow());
+        //StartCoroutine(SpawnArrow());
     }
 
     // Update is called once per frame
@@ -19,13 +20,18 @@ public class Bow : MonoBehaviour
         //SpawnArrow();
     }
 
+    public void Shoot()
+    {
+        StartCoroutine(SpawnArrow());
+    }
+
     IEnumerator SpawnArrow()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(3);
-            Instantiate(arrow, myTransform.position, new Quaternion());
-        }
+        arrowSprite.enabled = true;
+        yield return new WaitForSeconds(1);
+        Instantiate(arrow, myTransform.position, new Quaternion());
+        arrowSprite.enabled = false;
+        
 
     }
     
