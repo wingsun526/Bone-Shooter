@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int health = 6;
     private Rigidbody2D myRigidbody2D;
     private PlayerMovement playerMovement;
+    private CinemachineImpulseSource _cinemachineImpulseSource;
 
     private float lastTimeBeingDamage;
     // Start is called before the first frame update
@@ -20,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
+        _cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
@@ -58,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
         if (Time.time - lastTimeBeingDamage < invincibleTimeAfterDamage) return;
         health -= dmgData.damage;
         playerMovement.DamagePush(dmgData.damageDirection * (float) 1.1);
-        
+        _cinemachineImpulseSource.GenerateImpulse();
         GameManager.instance.ScreenShake();
         lastTimeBeingDamage = Time.time;
         if (health <= 0) 

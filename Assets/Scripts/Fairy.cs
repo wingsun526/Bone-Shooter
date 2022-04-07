@@ -12,11 +12,13 @@ public class Fairy : Enemy
     private bool actionInProgress = false;
 
     private bool rotateWeaponLock = false;
+
+    private Coroutine fairyInAction;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        myWeapon = myTransform.Find("Weapon");
+        myWeapon = transform.Find("Weapon");
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class Fairy : Enemy
     {
         if (beingPush) return;
         if (actionInProgress) return;
-        StartCoroutine(FairyAction());
+        fairyInAction = StartCoroutine(FairyAction());
 
     }
 
@@ -63,7 +65,9 @@ public class Fairy : Enemy
         yield return new WaitForSeconds(2);
         rotateWeaponLock = true;
         actionInProgress = false;
-        
+
+        fairyInAction = null;
+
     }
 
     private void RotateWeapon()

@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator myWeaponAnimator;
     private Rigidbody2D myRigidbody2D;
     private SpriteRenderer mySpriteRenderer;
-    private Transform myTransform;
     private Transform myWeapon;
 
     internal bool beingPush = false;
@@ -40,8 +39,7 @@ public class PlayerMovement : MonoBehaviour
         
         myRigidbody2D = GetComponent<Rigidbody2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
-        myTransform = GetComponent<Transform>();
-        myWeapon = myTransform.Find("Weapon");
+        myWeapon = transform.Find("Weapon");
         myWeaponAnimator = myWeapon.GetComponentInChildren<Animator>();
     }
 
@@ -158,12 +156,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (mouseWorldPosition.x > myRigidbody2D.position.x)
         {
-            myTransform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if (mouseWorldPosition.x < myRigidbody2D.position.x)
         {
-            myTransform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
+    
 }

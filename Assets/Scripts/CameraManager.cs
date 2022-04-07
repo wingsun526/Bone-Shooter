@@ -8,21 +8,28 @@ public class CameraManager : MonoBehaviour
     [SerializeField] float shakeMagnitude = 0.01f;
     
     private Vector3 initialPosition;
-    void Start()
+
+
+    private void Start()
+    {
+        
+    }
+     
+    
+
+    public void PlayScreenShake()
     {
         initialPosition = transform.position;
-    }
-
-    public void Play()
-    {
         StartCoroutine(Shake());
     }
 
     IEnumerator Shake()
     {
+        //initialPosition = transform.position;
         float elapsedTime = 0;
         while (elapsedTime < shakeDuration)
         {
+            
             transform.position = initialPosition + (Vector3)Random.insideUnitCircle * shakeMagnitude;
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();

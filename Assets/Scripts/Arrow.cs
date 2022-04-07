@@ -10,14 +10,12 @@ public class Arrow : MonoBehaviour
     [SerializeField] private int damage;
     
     private Rigidbody2D myRigidbody;
-    private Transform myTransform;
     private Transform playerTransform;
     private Vector2 directionToGo;
 
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        myTransform = GetComponent<Transform>();
     }
 
     void Start()
@@ -41,7 +39,7 @@ public class Arrow : MonoBehaviour
     {
         directionToGo = (playerTransform.position - myRigidbody.transform.position).normalized;
         var arrowRotateAngle = Vector2.Angle(myRigidbody.position, playerTransform.position);
-        myTransform.up = directionToGo;
+        transform.up = directionToGo;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

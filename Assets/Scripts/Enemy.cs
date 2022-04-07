@@ -15,7 +15,6 @@ public class Enemy : LivingThings
    
     protected Rigidbody2D myRigidbody2D;
     protected Animator myAnimator;
-    protected Transform myTransform;
     protected bool beingPush = false;
     private float lastPush;
     protected bool lockSpriteFlip = false;
@@ -27,7 +26,6 @@ public class Enemy : LivingThings
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myTransform = GetComponent<Transform>();
     }
 
     
@@ -78,11 +76,11 @@ public class Enemy : LivingThings
         
         if (myRigidbody2D.position.x > playerTransform.position.x)
         {
-            myTransform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else if (myRigidbody2D.position.x < playerTransform.position.x)
         {
-            myTransform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -93,6 +91,7 @@ public class Enemy : LivingThings
         //string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration
         FloatingDamageTextManager.instance.Show(dmgData.damage.ToString(), 20, new Color(1f, 0.8f, 0.17f), myRigidbody2D.transform.position, Vector3.up * 40, 1f);
         health -= dmgData.damage;
+        GameManager.instance.OnScoreChange(dmgData.damage);
         if (health <= 0) 
         {
             Die();
@@ -101,6 +100,7 @@ public class Enemy : LivingThings
     
     protected override void Die()
     {
+        
         Destroy(gameObject);
     }
 }

@@ -17,11 +17,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private ScoreText scoreText;
 
 
+    
+    public void OnScoreChange(int val)
+    {
+        scoreText.ChangeScore(val);
+    }
     public void ScreenShake()
     {
-        cameraManager.Play();
+        cameraManager.PlayScreenShake();
     }
 
 }

@@ -1,5 +1,5 @@
 {
-    "name": "input",
+    "name": "TopDownDungeon",
     "maps": [
         {
             "name": "Player",
