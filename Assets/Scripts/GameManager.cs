@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private ScoreText scoreText;
+    [SerializeField] private WaveSpawner waveSpawner;
+    [SerializeField] private ParticleSystemManager particleSystemManager;
 
 
     
@@ -30,4 +32,20 @@ public class GameManager : MonoBehaviour
         cameraManager.PlayScreenShake();
     }
 
+    public PlayerMovement GetPlayerMovement()
+    {
+        return playerMovement;
+    }
+    
+    // All about waveSpawner
+    public void OnEnemyDestroy()
+    {
+        waveSpawner.OneLessEnemyOnScreen();
+    }
+    
+    // Particle System
+    public void OnEnemySpawnParticle(Vector3 newLocation)
+    {
+        particleSystemManager.FireEnemySpawnParticle(newLocation);
+    }
 }

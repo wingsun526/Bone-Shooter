@@ -11,13 +11,14 @@ public class Enemy : LivingThings
     [SerializeField] protected float speed = 1.0f;
     [SerializeField] protected float chaseLength = 0.5f;
     [SerializeField] private float pushRecoveryTime = 0.8f;
-    [SerializeField] protected Transform playerTransform;
-   
+
+    protected Transform playerTransform;
     protected Rigidbody2D myRigidbody2D;
     protected Animator myAnimator;
     protected bool beingPush = false;
     private float lastPush;
     protected bool lockSpriteFlip = false;
+    private bool spawningDoNotMove = true;
     
      
     
@@ -26,14 +27,23 @@ public class Enemy : LivingThings
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        playerTransform = GameManager.instance.GetPlayerMovement().GetComponent<Transform>();
+        StartCoroutine(Spawning());
     }
 
     
     protected virtual void Update()
     {
+        if (spawningDoNotMove) return;
         FlipSprite();
         FreeToMove();
         IndividualAction();
+    }
+
+    IEnumerator Spawning()
+    {
+        yield return new WaitForSeconds(3);
+        spawningDoNotMove = false;
     }
 
     private void FreeToMove()
@@ -100,7 +110,7 @@ public class Enemy : LivingThings
     
     protected override void Die()
     {
-        
         Destroy(gameObject);
+        GameManager.instance.OnEnemyDestroy();
     }
 }

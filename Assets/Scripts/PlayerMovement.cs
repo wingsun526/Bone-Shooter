@@ -121,7 +121,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!Attacking) return;
         if(other.gameObject.CompareTag("Enemy") )
-        {
+        {   
+            // Attack one enemy at the same time
+            Attacking = false;
             // Damage based on the velocity
             int momentumDamage = (int)Math.Floor(Math.Abs(playerCurrentVelocity.x) + Math.Abs(playerCurrentVelocity.y));
             DamageData dmgData = new DamageData();

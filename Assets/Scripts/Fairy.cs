@@ -11,7 +11,7 @@ public class Fairy : Enemy
 
     private bool actionInProgress = false;
 
-    private bool rotateWeaponLock = false;
+    private bool rotateWeaponLock = true;
 
     private Coroutine fairyInAction;
     // Start is called before the first frame update
