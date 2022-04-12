@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody2D myRigidbody2D;
     private PlayerMovement playerMovement;
     private CinemachineImpulseSource _cinemachineImpulseSource;
+    private LevelManager levelManager;
 
     private float lastTimeBeingDamage;
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
         myRigidbody2D = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
         _cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
@@ -72,6 +75,6 @@ public class PlayerHealth : MonoBehaviour
     
     void Die()
     {
-        Debug.Log("You are Dead!!");
+        levelManager.LoadGameOverScene();
     }
 }

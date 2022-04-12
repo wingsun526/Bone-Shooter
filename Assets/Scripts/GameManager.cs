@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,19 +14,25 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
+        
+        
     }
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private CameraManager cameraManager;
-    [SerializeField] private ScoreText scoreText;
+    //[SerializeField] private ScoreManager scoreManager;
     [SerializeField] private WaveSpawner waveSpawner;
     [SerializeField] private ParticleSystemManager particleSystemManager;
+    private ScoreManager scoreManager;
 
+    private void Start()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
 
-    
     public void OnScoreChange(int val)
     {
-        scoreText.ChangeScore(val);
+        scoreManager.ChangeScore(val);
     }
     public void ScreenShake()
     {
