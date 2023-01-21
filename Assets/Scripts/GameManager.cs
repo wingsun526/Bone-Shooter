@@ -24,12 +24,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WaveSpawner waveSpawner;
     [SerializeField] private ParticleSystemManager particleSystemManager;
     private ScoreManager scoreManager;
+    private bool gameIsActive = false;
 
     private void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
+    public void setGameActive(bool toPause)
+    {
+        gameIsActive = toPause;
+    }
+    public bool IsGameActive()
+    {
+        return gameIsActive;
+    }
     public void OnScoreChange(int val)
     {
         scoreManager.ChangeScore(val);
@@ -43,6 +52,8 @@ public class GameManager : MonoBehaviour
     {
         return playerMovement;
     }
+    
+    
     
     // All about waveSpawner
     public void OnEnemyDestroy()

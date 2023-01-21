@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.IsGameActive() == false) return;
         mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         FreeToMove();
         Run();
@@ -82,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnFire(InputValue value)
     {
+        if (GameManager.instance.IsGameActive() == false) return;
         Attacking = true;
         PushPlayer();
         

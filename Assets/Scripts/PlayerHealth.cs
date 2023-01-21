@@ -12,13 +12,15 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject healthBar;
     [SerializeField] private float invincibleTimeAfterDamage;
     
-    [SerializeField] private int health = 6;
+    [SerializeField] private int maxHealth = 6;
     private Rigidbody2D myRigidbody2D;
     private PlayerMovement playerMovement;
     private CinemachineImpulseSource _cinemachineImpulseSource;
     private LevelManager levelManager;
 
     private float lastTimeBeingDamage;
+
+    private int health;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         _cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         levelManager = FindObjectOfType<LevelManager>();
+        ResetHealth();
     }
 
     // Update is called once per frame
@@ -34,6 +37,10 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
+    public void ResetHealth()
+    {
+        health = maxHealth;
+    }
     private void UpdateHealthBar()
     {
         var listOfHearts = healthBar.GetComponentsInChildren<Image>();
@@ -75,6 +82,6 @@ public class PlayerHealth : MonoBehaviour
     
     void Die()
     {
-        levelManager.LoadGameOverScene();
+        
     }
 }
