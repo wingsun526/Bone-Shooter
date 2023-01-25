@@ -13,8 +13,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private int maxEnemies = 10;
     [SerializeField] private int maxNumberOfEnemiesOnScreen = 5;
     [SerializeField] private float timeBetweenSpawn = 2f;
-    [SerializeField] private Animator menuAnimator;
-    [SerializeField] private UI theUI;
+    [SerializeField] private Transform spawnedEnemies;
 
     private LevelManager levelManager;
     private Bounds bounds;
@@ -24,10 +23,11 @@ public class WaveSpawner : MonoBehaviour
     
   
     
-    private void ResetGame()
+    public void Reset()
     {
         enemiesLeft = maxEnemies;
         numberOfEnemiesOnScreen = 0;
+        DestroyAllEnemies();
     }
     
     //reset all numbers when replay;
@@ -50,12 +50,11 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log(spawnArea.bounds.min);
     }
 
-    public void StartSpawning() // use by play button
+    public void StartSpawning()
     {
-        GameManager.instance.setGameActive(true);
-        ResetGame();
+        Reset();
         StartCoroutine(SpawnEnemies());
-        menuAnimator.SetBool("hideMenu", true);
+        
     }
     //called when enemy dead
     public void OneLessEnemyOnScreen()
@@ -71,7 +70,7 @@ public class WaveSpawner : MonoBehaviour
             if (numberOfEnemiesOnScreen < maxNumberOfEnemiesOnScreen) // control number of enemies on screen
             {
                 Vector2 newLocation = new Vector2(Random.Range(bounds.max.x, bounds.min.x), Random.Range(bounds.max.y, bounds.min.y));
-                Enemy thisThing = Instantiate(enemyList[Random.Range(0, kindsOfEnemies)], newLocation, new Quaternion());
+                Enemy thisThing = Instantiate(enemyList[Random.Range(0, kindsOfEnemies)], newLocation, new Quaternion(), spawnedEnemies);
                 Renderer rendererOfThis = thisThing.GetComponent<Renderer>();
                 rendererOfThis.sortingOrder = enemiesLeft; // each enemy should have unique render order in layer
                 GameManager.instance.OnEnemySpawnParticle(new Vector3(newLocation.x, rendererOfThis.bounds.min.y));
@@ -83,6 +82,13 @@ public class WaveSpawner : MonoBehaviour
 
         
     }
+    private void DestroyAllEnemies()
+    {
+        foreach (Transform child in spawnedEnemies)
+        {
+            Destroy(child.gameObject);
+        }
+    }
     
     public void clearAllEnemiesCheck()
     {
@@ -90,9 +96,8 @@ public class WaveSpawner : MonoBehaviour
         if(enemiesLeft == 0 && numberOfEnemiesOnScreen == 0)
         {
             ScoreManager.instance.Win();
-            GameManager.instance.setGameActive(false);
-            menuAnimator.SetBool("hideMenu", false);
-            theUI.setEndMenuActive();
+            GameManager.instance.EndGame();
+           
             //levelManager.LoadGameOverScene();
         }
     }

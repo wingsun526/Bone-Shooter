@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     //[SerializeField] private ScoreManager scoreManager;
     [SerializeField] private WaveSpawner waveSpawner;
     [SerializeField] private ParticleSystemManager particleSystemManager;
+    [SerializeField] private UI theUI;
+    [SerializeField] private Animator menuAnimator;
+    
     private ScoreManager scoreManager;
     private bool gameIsActive = false;
 
@@ -31,6 +34,21 @@ public class GameManager : MonoBehaviour
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
+    public void StartGame()// used by play button
+    {
+        gameIsActive = true;
+        waveSpawner.StartSpawning();
+        menuAnimator.SetBool("hideMenu", true);
+        scoreManager.ResetScore();
+    }
+    
+    public void EndGame()
+    {
+        gameIsActive = false;
+        menuAnimator.SetBool("hideMenu", false);
+        theUI.setEndMenuActive();
+        waveSpawner.Reset();
+    }
     public void setGameActive(bool toPause)
     {
         gameIsActive = toPause;
