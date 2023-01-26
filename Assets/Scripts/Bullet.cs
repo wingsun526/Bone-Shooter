@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private int damage;
-    
+    [SerializeField] private int speed;
     private Transform playerTransform;
     private Vector2 directionToGo;
 
@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     private void BulletFlying()
     {
         //myRigidbody.velocity = directionToGo * speed;
-        transform.position += new Vector3(directionToGo.x, directionToGo.y, 0) * 0.005f;
+        transform.position += new Vector3(directionToGo.x, directionToGo.y, 0) * (speed * Time.deltaTime);
     }
     
     private void OnCollisionEnter2D(Collision2D other)
