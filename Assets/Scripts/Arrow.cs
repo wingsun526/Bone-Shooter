@@ -53,8 +53,8 @@ public class Arrow : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Destroy(gameObject);
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     Destroy(gameObject);
+    // }
 }

@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float weaponPushForce = 5.0f;
     [SerializeField] private float weaponReloadTime = 1.0f;
     //[SerializeField] private ParticleSystem weaponFiring;
+    [SerializeField] private Bullet bulletPrefab; 
     
     
     private Vector2 moveInput;
@@ -31,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mouseWorldPosition;
     private float lastPush;
     private bool Attacking = false;
+    
+    //
+    private Vector2 weaponRotateDirection;
 
     private Vector3 playerCurrentVelocity;
     void Start()
@@ -71,10 +75,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotateWeapon()
     {
-        
-        Vector2 direction = (mouseWorldPosition - (Vector2) myWeapon.position).normalized;
-        myWeapon.up = direction;
+        weaponRotateDirection = (mouseWorldPosition - (Vector2) myWeapon.position).normalized;
+        myWeapon.up = weaponRotateDirection;
     }
+    
+    //spawn bullet with trajectory
+    //spawn at location, move in one direction
 
 
     void OnMove(InputValue value)
@@ -85,16 +91,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.instance.IsGameActive() == false) return;
         Attacking = true;
-        PushPlayer();
+        ShootAndPushPlayer();
+        //
         
     }
-    void PushPlayer()
+
+    private void ShootOutBullet(Vector2 direction)
+    {
+        var theBullet = Instantiate(bulletPrefab, transform.position, new Quaternion());
+        theBullet.SetDirection(direction);
+    }
+
+    void ShootAndPushPlayer()
     {
         if (Time.time - lastPush > weaponReloadTime)
         {
             beingPush = true;
             lastPush = Time.time;
             myWeaponAnimator.SetTrigger("fireNow");
+            ShootOutBullet(weaponRotateDirection);
             //weaponFiring.Play();
             // shoot the player to the direction with a force
             // difference Forcemode are available
